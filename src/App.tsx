@@ -1,6 +1,6 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
+// import { useState } from "react";
+// import reactLogo from "./assets/react.svg";
+// import viteLogo from "/vite.svg";
 import "./App.css";
 import LoginPage from "./pages/LoginPage";
 
@@ -8,7 +8,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import DashboardPage from "./pages/DashboardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
-import LoginForm from "./components/LoginForm";
+import PatientForm from "./pages/PatientForm";
+import EditPatientForm from "./pages/EditPatientForm";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -38,6 +39,8 @@ function App() {
       <Router>
         <Routes>
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/add-patient" element={<PatientForm />} />
+          <Route path="/edit-patient/:id" element={<EditPatientForm />} />
           <Route
             path="/dashboard"
             element={

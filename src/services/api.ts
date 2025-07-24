@@ -109,8 +109,29 @@ export const addPatient = async (
     });
 
     const data = await res.json();
-    return { success: res.ok, message: data.message || "Something happened" };
+    return {
+      success: res.ok,
+      message: data.message || "Something happened Try Again Later!",
+    };
   } catch (error) {
-    return { success: false, message: "Network error" };
+    return { success: false, message: "Network Error! Try Again Later!" };
   }
+};
+
+export const getPatients = async () => {
+  const res = await fetch("http://localhost:5000/api/patient");
+  if (!res.ok)
+    throw new Error("Failed to fetch patients, Reload or Refresh Page!");
+  return res.json();
+};
+
+export const updatePatient = async (id: string, data: any) => {
+  const res = await fetch(`http://localhost:5000/api/patient/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  });
+  return res.json();
 };
