@@ -1,5 +1,6 @@
 import express from "express";
 import Patient from "../../models/Patient";
+// import Purchase from "../../models/Purchase";
 
 const router = express.Router();
 
@@ -58,5 +59,21 @@ router.put("/:id", async (req, res) => {
     res.status(500).json({ message: "Error updating patient", error });
   }
 });
+
+// //Purchase
+// router.post("/:id", async (req, res) => {
+//   try {
+//     const { id } = req.params;
+
+//     // Make sure we include the patient ID in the purchase document
+//     const purchase = new Purchase({ ...req.body, id });
+
+//     await purchase.save();
+//     res.status(201).json({ message: "Purchase added successfully!" });
+//   } catch (error) {
+//     console.error("Purchase error:", error);
+//     res.status(500).json({ message: "Error adding purchase", error });
+//   }
+// });
 
 export default router;

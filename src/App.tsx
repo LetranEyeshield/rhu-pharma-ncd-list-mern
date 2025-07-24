@@ -10,6 +10,7 @@ import DashboardPage from "./pages/DashboardPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PatientForm from "./pages/PatientForm";
 import EditPatientForm from "./pages/EditPatientForm";
+import PurchasePatientForm from "./pages/PurchasePatientForm";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -41,6 +42,10 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/add-patient" element={<PatientForm />} />
           <Route path="/edit-patient/:id" element={<EditPatientForm />} />
+          <Route
+            path="/purchase-patient/:pid"
+            element={<PurchasePatientForm />}
+          />
           <Route
             path="/dashboard"
             element={

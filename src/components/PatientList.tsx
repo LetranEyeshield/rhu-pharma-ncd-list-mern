@@ -1,9 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { getPatients } from "../services/api";
 import { Link } from "react-router-dom";
+import type { Patient } from "../types";
+import axios from "axios";
+import debounce from "lodash/debounce";
 
 export default function DashboardPage() {
-  const [patients, setPatients] = useState([]);
+  //const [patients, setPatients] = useState([]);
+  const [patients, setPatients] = useState<Patient[]>([]);
+  const [query, setQuery] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const fetchPatients = async () => {
@@ -21,6 +27,7 @@ export default function DashboardPage() {
   return (
     <div>
       <h1>Patient List</h1>
+
       <table border={1} cellPadding={6} style={{ borderCollapse: "collapse" }}>
         <thead>
           <tr>
@@ -33,7 +40,8 @@ export default function DashboardPage() {
           </tr>
         </thead>
         <tbody>
-          {patients.map((patient: any, index) => (
+          {/* {patients.map((patient: any, index) => ( */}
+          {patients.map((patient: Patient, index) => (
             <tr key={index}>
               <td>
                 {patient.firstName} {patient.middleName} {patient.lastName}
@@ -48,6 +56,9 @@ export default function DashboardPage() {
               </td>
               <td>
                 <Link to={`/edit-patient/${patient._id}`}>Edit</Link>
+                <Link to={`/purchase-patient/${patient._id}`}>
+                  Add Purchase
+                </Link>
               </td>
             </tr>
           ))}

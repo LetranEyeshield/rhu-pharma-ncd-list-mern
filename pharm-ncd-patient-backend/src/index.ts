@@ -8,6 +8,7 @@ import cors from "cors";
 import { connectDB } from "./config/db";
 import authRoutes from "./routes/auth";
 import patientRoutes from "./routes/patient"; // ✅ Corrected path
+import purchaseRoutes from "./routes/purchase"; // ✅ Corrected path
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/patient", patientRoutes); // ✅ Now this works
+app.use("/api", purchaseRoutes); // ✅ Now this works
 
 const PORT = process.env.PORT || 5000;
 

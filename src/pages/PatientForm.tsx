@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { addPatient } from "../services/api";
+import { Link } from "react-router-dom";
 
 const medicinesList = ["Medicine 1", "Medicine 2", "Medicine 3"];
 
@@ -38,11 +39,13 @@ export default function PatientForm() {
 
     const birthdayISO = new Date(form.birthday).toISOString();
     const slicedBirthday = birthdayISO.slice(0, 10);
+    const numAge: number = Number(form.age);
 
     const newPatient = {
       ...form,
       //   age,
       birthday: slicedBirthday,
+      age: numAge,
     };
 
     const result = await addPatient(newPatient);
@@ -51,37 +54,44 @@ export default function PatientForm() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <input
-        name="firstName"
-        placeholder="First Name"
-        onChange={handleChange}
-      />
-      <input
-        name="middleName"
-        placeholder="Middle Name"
-        onChange={handleChange}
-      />
-      <input name="lastName" placeholder="Last Name" onChange={handleChange} />
-      <input type="date" name="birthday" onChange={handleChange} />
-      <input type="number" name="age" onChange={handleChange} />
-      <input name="address" placeholder="Address" onChange={handleChange} />
+    <>
+      <form onSubmit={handleSubmit}>
+        <input
+          name="firstName"
+          placeholder="First Name"
+          onChange={handleChange}
+        />
+        <input
+          name="middleName"
+          placeholder="Middle Name"
+          onChange={handleChange}
+        />
+        <input
+          name="lastName"
+          placeholder="Last Name"
+          onChange={handleChange}
+        />
+        <input type="date" name="birthday" onChange={handleChange} />
+        <input type="number" name="age" onChange={handleChange} />
+        <input name="address" placeholder="Address" onChange={handleChange} />
 
-      <fieldset>
-        <legend>Select Medicines</legend>
-        {medicinesList.map((medicine) => (
-          <label key={medicine}>
-            <input
-              type="checkbox"
-              checked={form.medicines.includes(medicine)}
-              onChange={() => handleCheckbox(medicine)}
-            />
-            {medicine}
-          </label>
-        ))}
-      </fieldset>
+        <fieldset>
+          <legend>Select Medicines</legend>
+          {medicinesList.map((medicine) => (
+            <label key={medicine}>
+              <input
+                type="checkbox"
+                checked={form.medicines.includes(medicine)}
+                onChange={() => handleCheckbox(medicine)}
+              />
+              {medicine}
+            </label>
+          ))}
+        </fieldset>
 
-      <button type="submit">Add Patient</button>
-    </form>
+        <button type="submit">Add Patient</button>
+      </form>
+      <Link to={`/dashboard`}>Back</Link>
+    </>
   );
 }

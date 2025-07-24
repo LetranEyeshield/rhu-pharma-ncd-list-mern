@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import { updatePatient } from "../services/api";
-import type { Patient } from "../types";
+import { purchasePatient } from "../services/api";
 
-export default function EditPatientForm() {
-  const { id } = useParams();
+export default function PurchasePatientForm() {
+  //const { pid } = useParams();
+  const { pid: paramPid } = useParams();
+  const [GID, setGID] = useState(paramPid || "");
   const navigate = useNavigate();
 
   const [form, setForm] = useState({
+    pid: "",
     firstName: "",
     middleName: "",
     lastName: "",
@@ -19,10 +21,10 @@ export default function EditPatientForm() {
 
   // Fetch patient data to pre-fill form
   useEffect(() => {
-    fetch(`http://localhost:5000/api/patient/${id}`)
+    fetch(`http://localhost:5000/api/patient/${GID}`)
       .then((res) => res.json())
       .then((data) => setForm(data));
-  }, [id]);
+  }, [GID]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -39,24 +41,43 @@ export default function EditPatientForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
     const birthdayISO = new Date(form.birthday).toISOString();
     const slicedBirthday = birthdayISO.slice(0, 10);
     const numAge: number = Number(form.age);
-    const editPatient = {
-      ...form,
-      //   age,
+
+    const { _id, ...cleanForm } = form as typeof form & { _id?: string };
+
+    const editPurchase = {
+      ...cleanForm,
+      pid: GID,
       birthday: slicedBirthday,
       age: numAge,
     };
     // await updatePatient(id!, form);
-    await updatePatient(id!, editPatient);
-    alert("Patient updated!");
-    navigate("/");
+    // await purchasePatient(pid!, editPurchase);
+    await purchasePatient(editPurchase);
+    alert("Purchased Success!");
+    //navigate("/");
   };
+
+  // const handleSubmit = async () => {
+  //   await purchasePatient({
+  //     patientId: selectedPatientId,
+  //     medicine: selectedMedicine,
+  //     quantity: 2,
+  //   });
+  // };
 
   return (
     <>
       <form onSubmit={handleSubmit}>
+        <input
+          name="pid"
+          value={GID}
+          onChange={(e) => setGID(e.target.value)}
+        />
+
         <input
           name="firstName"
           value={form.firstName}
@@ -90,7 +111,7 @@ export default function EditPatientForm() {
           ))}
         </fieldset>
 
-        <button type="submit">Update Patient</button>
+        <button type="submit">Submit</button>
       </form>
       <Link to={`/dashboard`}>Back</Link>
     </>

@@ -16,7 +16,7 @@
 //   return false; // login failed
 // };
 
-const API_URL = "http://localhost:5000/api/auth"; // your backend base URL
+//const API_URL = "http://localhost:5000/api/auth"; // your backend base URL
 
 // export const loginUser = async (
 //   username: string,
@@ -62,6 +62,87 @@ const API_URL = "http://localhost:5000/api/auth"; // your backend base URL
 //
 //
 //
+//NON AXIOS
+// export const loginUser = async (
+//   username: string,
+//   password: string
+// ): Promise<{
+//   success: boolean;
+//   token?: string;
+//   user?: { username: string };
+// }> => {
+//   try {
+//     const res = await fetch("http://localhost:5000/api/auth/login", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify({ username, password }),
+//     });
+
+//     const data = await res.json();
+
+//     if (!res.ok) {
+//       return { success: false };
+//     }
+
+//     return {
+//       success: true,
+//       token: data.token,
+//       user: data.user,
+//     };
+//   } catch (error) {
+//     return { success: false };
+//   }
+// };
+
+// // src/services/api.ts
+// export const addPatient = async (
+//   patientData: any
+// ): Promise<{ success: boolean; message: string }> => {
+//   try {
+//     const res = await fetch("http://localhost:5000/api/patient", {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//       },
+//       body: JSON.stringify(patientData),
+//     });
+
+//     const data = await res.json();
+//     return {
+//       success: res.ok,
+//       message: data.message || "Something happened Try Again Later!",
+//     };
+//   } catch (error) {
+//     return { success: false, message: "Network Error! Try Again Later!" };
+//   }
+// };
+
+// export const getPatients = async () => {
+//   const res = await fetch("http://localhost:5000/api/patient");
+//   if (!res.ok)
+//     throw new Error("Failed to fetch patients, Reload or Refresh Page!");
+//   return res.json();
+// };
+
+// export const updatePatient = async (id: string, data: any) => {
+//   const res = await fetch(`http://localhost:5000/api/patient/${id}`, {
+//     method: "PUT",
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//     body: JSON.stringify(data),
+//   });
+//   return res.json();
+// };
+//
+//
+//
+//
+//AXIOS
+import axios from "./axiosInstance";
+import type { Patient, Purchase } from "../types";
 export const loginUser = async (
   username: string,
   password: string
@@ -95,43 +176,43 @@ export const loginUser = async (
   }
 };
 
-// src/services/api.ts
-export const addPatient = async (
-  patientData: any
-): Promise<{ success: boolean; message: string }> => {
-  try {
-    const res = await fetch("http://localhost:5000/api/patient", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(patientData),
-    });
+// Add Patient
+export async function addPatient(data: Omit<Patient, "_id">) {
+  const res = await axios.post("/patient", data);
+  return res.data;
+}
 
-    const data = await res.json();
-    return {
-      success: res.ok,
-      message: data.message || "Something happened Try Again Later!",
-    };
-  } catch (error) {
-    return { success: false, message: "Network Error! Try Again Later!" };
-  }
-};
+// Get all patients
+export async function getPatients(): Promise<Patient[]> {
+  const res = await axios.get("/patient");
+  return res.data;
+}
 
-export const getPatients = async () => {
-  const res = await fetch("http://localhost:5000/api/patient");
-  if (!res.ok)
-    throw new Error("Failed to fetch patients, Reload or Refresh Page!");
-  return res.json();
-};
+// Get single patient by ID
+export async function getPatient(id: string): Promise<Patient> {
+  const res = await axios.get(`/patient/${id}`);
+  return res.data;
+}
 
-export const updatePatient = async (id: string, data: any) => {
-  const res = await fetch(`http://localhost:5000/api/patient/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  });
-  return res.json();
-};
+// Update patient
+export async function updatePatient(id: string, data: Partial<Patient>) {
+  const res = await axios.put(`/patient/${id}`, data);
+  return res.data;
+}
+
+// Delete patient
+export async function deletePatient(id: string) {
+  const res = await axios.delete(`/patient/${id}`);
+  return res.data;
+}
+
+// Purchase Patient
+// export async function purchasePatient(pid: string, data: Partial<Purchase>) {
+//   const res = await axios.post(`/patient/${pid}`, data);
+//   return res.data;
+// }
+
+export async function purchasePatient(data: Omit<Purchase, "_id">) {
+  const res = await axios.post("/purchase", data);
+  return res.data;
+}
