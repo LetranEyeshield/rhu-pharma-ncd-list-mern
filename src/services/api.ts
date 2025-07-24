@@ -94,3 +94,23 @@ export const loginUser = async (
     return { success: false };
   }
 };
+
+// src/services/api.ts
+export const addPatient = async (
+  patientData: any
+): Promise<{ success: boolean; message: string }> => {
+  try {
+    const res = await fetch("http://localhost:5000/api/patient", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(patientData),
+    });
+
+    const data = await res.json();
+    return { success: res.ok, message: data.message || "Something happened" };
+  } catch (error) {
+    return { success: false, message: "Network error" };
+  }
+};

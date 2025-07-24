@@ -62,7 +62,8 @@ export default function LoginPage() {
       // ✅ Save token and user
       localStorage.setItem("token", result.token);
       localStorage.setItem("user", JSON.stringify(result.user));
-      navigate("/");
+      //navigate("/");
+      navigate("/dashboard", { replace: true });
     } else {
       setMessage("Invalid Credentials");
       setSuccess(false);
@@ -84,7 +85,7 @@ export default function LoginPage() {
   };
   return (
     <div>
-      <h1>Welcome</h1>
+      <h1>PHARM NCD PATIENT LIST</h1>
       <LoginForm onLogin={handleLogin} />
       {message && (
         <p style={{ color: success ? "green" : "red", marginTop: "1rem" }}>
