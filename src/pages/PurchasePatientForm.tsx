@@ -6,7 +6,7 @@ export default function PurchasePatientForm() {
   //const { pid } = useParams();
   const { pid: paramPid } = useParams();
   const [GID, setGID] = useState(paramPid || "");
-  const navigate = useNavigate();
+  //const navigate = useNavigate();
 
   const [form, setForm] = useState({
     pid: "",

@@ -217,10 +217,30 @@ export async function purchasePatient(data: Omit<Purchase, "_id">) {
   return res.data;
 }
 
-// Search purchases by name
-export async function searchPatientByName(name: string): Promise<Patient[]> {
-  const res = await axios.get(`/patient/search`, {
+export async function searchPatient(name: string): Promise<Patient[]> {
+  const response = await axios.get(`/patients/search`, {
     params: { name },
   });
-  return res.data;
+  return response.data;
 }
+
+// Search purchases by name
+// export async function searchPatientByName(name: string): Promise<Patient[]> {
+//   const res = await axios.get(`/patient/search`, {
+//     params: { name },
+//   });
+//   return res.data;
+// }
+// export const searchPatients = async (name: string) => {
+//   const res = await axios.get(
+//     `http://localhost:5000/api/patients/search?name=${name}`
+//   );
+//   return res.data;
+// };
+
+// export const searchPatients = async (name: string): Promise<Patient[]> => {
+//   const response = await axios.get(`/api/patient/search`, {
+//     params: { name },
+//   });
+//   return response.data;
+// };
