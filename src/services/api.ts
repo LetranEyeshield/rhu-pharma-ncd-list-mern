@@ -216,3 +216,11 @@ export async function purchasePatient(data: Omit<Purchase, "_id">) {
   const res = await axios.post("/purchase", data);
   return res.data;
 }
+
+// Search purchases by name
+export async function searchPatientByName(name: string): Promise<Patient[]> {
+  const res = await axios.get(`/patient/search`, {
+    params: { name },
+  });
+  return res.data;
+}

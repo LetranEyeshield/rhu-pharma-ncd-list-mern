@@ -2,13 +2,10 @@ import { useEffect, useState, useCallback } from "react";
 import { getPatients } from "../services/api";
 import { Link } from "react-router-dom";
 import type { Patient } from "../types";
-import axios from "axios";
-import debounce from "lodash/debounce";
 
 export default function DashboardPage() {
   //const [patients, setPatients] = useState([]);
   const [patients, setPatients] = useState<Patient[]>([]);
-  const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -18,6 +15,7 @@ export default function DashboardPage() {
         setPatients(data);
       } catch (error) {
         console.error("Error fetching patients:", error);
+        setLoading(true);
       }
     };
 
@@ -41,6 +39,7 @@ export default function DashboardPage() {
         </thead>
         <tbody>
           {/* {patients.map((patient: any, index) => ( */}
+          {loading && <p>Loading...</p>}
           {patients.map((patient: Patient, index) => (
             <tr key={index}>
               <td>

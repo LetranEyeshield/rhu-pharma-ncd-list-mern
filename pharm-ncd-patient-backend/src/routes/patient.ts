@@ -60,6 +60,24 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.get("/search", async (req, res) => {
+  const name = (req.query.name as string) || "";
+
+  try {
+    const results = await Patient.find({
+      $or: [
+        { firstName: new RegExp(name, "i") },
+        { middleName: new RegExp(name, "i") },
+        { lastName: new RegExp(name, "i") },
+      ],
+    });
+
+    res.json(results);
+  } catch (err) {
+    res.status(500).json({ message: "Search failed", error: err });
+  }
+});
+
 // //Purchase
 // router.post("/:id", async (req, res) => {
 //   try {
@@ -74,6 +92,17 @@ router.put("/:id", async (req, res) => {
 //     console.error("Purchase error:", error);
 //     res.status(500).json({ message: "Error adding purchase", error });
 //   }
+// });
+
+// router.get("/search", async (req, res) => {
+//   const query = req.query.query?.toString() || "";
+//   const regex = new RegExp(query, "i");
+
+//   const results = await Patient.find({
+//     $or: [{ firstName: regex }, { middleName: regex }, { lastName: regex }],
+//   });
+
+//   res.json(results);
 // });
 
 export default router;

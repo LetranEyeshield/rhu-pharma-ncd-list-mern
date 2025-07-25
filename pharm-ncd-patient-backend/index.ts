@@ -1,21 +1,27 @@
-// 📍 pharm-ncd-patient-backend/server.ts
-import express from "express";
-import mongoose from "mongoose";
-import cors from "cors";
-import dotenv from "dotenv";
-import patientRoutes from "./routes/patient";
+// // 📍 pharm-ncd-patient-backend/server.ts
+// import express from "express";
+// import mongoose from "mongoose";
+// import cors from "cors";
+// import dotenv from "dotenv";
+// import patientRoutes from "./src/routes/patient";
+// import purchaseRoutes from "./src/routes/purchase";
 
-dotenv.config();
+// require("dotenv").config();
+// const bodyParser = require("body-parser");
 
-const app = express();
-app.use(cors());
-app.use(express.json());
+// dotenv.config();
 
-mongoose
-  .connect(process.env.MONGO_URI!)
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.error("MongoDB error:", err));
+// const app = express();
+// app.use(cors());
+// app.use(express.json());
 
-app.use("/api/patients", patientRoutes);
+// mongoose
+//   .connect(process.env.MONGO_URI!)
+//   .then(() => console.log("MongoDB connected"))
+//   .catch((err) => console.error("MongoDB error:", err));
 
-app.listen(5000, () => console.log("Server running on http://localhost:5000"));
+// app.use("/api/patients", patientRoutes);
+// app.use("/api/patients/search", patientRoutes);
+// app.use("/api/purchase", purchaseRoutes);
+
+// app.listen(5000, () => console.log("Server running on http://localhost:5000"));
