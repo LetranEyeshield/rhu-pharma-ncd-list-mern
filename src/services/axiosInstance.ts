@@ -3,9 +3,10 @@ import axios from "axios";
 const axiosInstance = axios.create({
   // baseURL: "http://localhost:5000/api",
   //baseURL: import.meta.env.VITE_API_URL || "http://localhost:5000/api",
-  baseURL:
-    import.meta.env.VITE_API_URL ||
-    "https://rhu-pharma-ncd-list-mern.onrender.com/api",
+  // baseURL:
+  //   import.meta.env.VITE_API_URL ||
+  //   "https://rhu-pharma-ncd-list-mern.onrender.com/api",
+  baseURL: "https://rhu-pharma-ncd-list-mern.onrender.com/api",
   headers: {
     "Content-Type": "application/json",
   },
