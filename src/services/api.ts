@@ -164,7 +164,8 @@ export const loginUser = async (
   user?: { username: string };
 }> => {
   try {
-    const res = await fetch("http://localhost:5000/api/auth/login", {
+    // const res = await fetch("http://localhost:5000/api/auth/login", {
+    const res = await fetch(`${import.meta.env.VITE_API_URL}/api/auth/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -188,27 +189,37 @@ export const loginUser = async (
   }
 };
 
+//RAILWAY DEPLOYMENT
+//axios.get(`${import.meta.env.VITE_API_URL}/api/patient`);
+
 // Add Patient
 export async function addPatient(data: Omit<Patient, "_id">) {
-  const res = await axios.post("/patient", data);
+  // const res = await axios.post("/patient", data);
+  const res = await axios.post(`${import.meta.env.VITE_API_URL}/patient`, data);
   return res.data;
 }
 
 // Get all patients
 export async function getPatients(): Promise<Patient[]> {
-  const res = await axios.get("/patient");
+  // const res = await axios.get("/patient");
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/patient`);
   return res.data;
 }
 
 // Get single patient by ID
 export async function getPatient(id: string): Promise<Patient> {
-  const res = await axios.get(`/patient/${id}`);
+  // const res = await axios.get(`/patient/${id}`);
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/patient${id}`);
   return res.data;
 }
 
 // Update patient
 export async function updatePatient(id: string, data: Partial<Patient>) {
-  const res = await axios.put(`/patient/${id}`, data);
+  // const res = await axios.put(`/patient/${id}`, data);
+  const res = await axios.put(
+    `${import.meta.env.VITE_API_URL}/patient${id}`,
+    data
+  );
   return res.data;
 }
 
@@ -225,21 +236,33 @@ export async function deletePatient(id: string) {
 // }
 
 export async function purchasePatient(data: Omit<Purchase, "_id">) {
-  const res = await axios.post("/purchase", data);
+  // const res = await axios.post("/purchase", data);
+  const res = await axios.post(
+    `${import.meta.env.VITE_API_URL}/purchase`,
+    data
+  );
   return res.data;
 }
 
 export async function searchPurchase(name: string): Promise<Purchase[]> {
-  const response = await axios.get(`/purchase/search`, {
-    params: { name },
-  });
+  // const response = await axios.get(`/purchase/search`, {
+  const response = await axios.get(
+    `${import.meta.env.VITE_API_URL}/purchase/search`,
+    {
+      params: { name },
+    }
+  );
   return response.data;
 }
 
 export async function searchPatient(name: string): Promise<Patient[]> {
-  const response = await axios.get(`/patients/search`, {
-    params: { name },
-  });
+  // const response = await axios.get(`/patients/search`, {
+  const response = await axios.get(
+    `${import.meta.env.VITE_API_URL}/patients/search`,
+    {
+      params: { name },
+    }
+  );
   return response.data;
 }
 
