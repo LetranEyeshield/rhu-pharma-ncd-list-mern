@@ -1,10 +1,11 @@
-import express from "express";
+// import express from "express";
 import Patient from "../../models/Patient";
 // import Purchase from "../../models/Purchase";
+import express, { Request, Response } from "express";
 
 const router = express.Router();
 
-router.post("/", async (req, res) => {
+router.post("/", async (req: Request, res: Response) => {
   try {
     const patient = new Patient(req.body);
     await patient.save();
@@ -27,7 +28,7 @@ router.post("/", async (req, res) => {
 //   }
 // });
 
-router.get("/", async (req, res) => {
+router.get("/", async (req: Request, res: Response) => {
   try {
     const patients = await Patient.find().sort({ firstName: -1 });
     res.json(patients);
@@ -77,7 +78,7 @@ router.get("/", async (req, res) => {
 
 // routes/patientRoutes.ts
 // patientRoutes.ts
-router.get("/search", async (req, res) => {
+router.get("/search", async (req: Request, res: Response) => {
   const name = (req.query.name as string) || "";
 
   try {
@@ -100,7 +101,7 @@ router.get("/search", async (req, res) => {
 });
 
 //dynamic routes at the end
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const patient = await Patient.findById(id);
@@ -112,7 +113,7 @@ router.get("/:id", async (req, res) => {
 });
 
 // Update a patient
-router.put("/:id", async (req, res) => {
+router.put("/:id", async (req: Request, res: Response) => {
   try {
     const { id } = req.params;
     const updatedPatient = await Patient.findByIdAndUpdate(id, req.body, {

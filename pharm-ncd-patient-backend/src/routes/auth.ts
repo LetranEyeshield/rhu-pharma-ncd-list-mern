@@ -9,7 +9,7 @@ const JWT_SECRET = process.env.JWT_SECRET || "yoursecret"; // keep this in .env 
 
 const router = express.Router();
 
-router.post("/login", async (req, res) => {
+router.post("/login", async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
   try {
