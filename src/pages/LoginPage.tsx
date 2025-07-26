@@ -85,7 +85,6 @@ export default function LoginPage() {
   };
   return (
     <div>
-      <h1>PHARM NCD PATIENT LIST</h1>
       <LoginForm onLogin={handleLogin} />
       {message && (
         <p style={{ color: success ? "green" : "red", marginTop: "1rem" }}>

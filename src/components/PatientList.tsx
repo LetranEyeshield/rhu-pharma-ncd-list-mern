@@ -102,23 +102,35 @@ export default function PatientList() {
 
   return (
     <div>
-      <h2>Patient List</h2>
+      <h2 className="text-2xl md:text-5xl my-6 font-bold">Patient List</h2>
       <input
         type="text"
         placeholder="Search by name..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="border p-2 mb-4 rounded"
+        className="border py-1 px-2 mb-4 rounded bg-green-100"
       />
-      <table border={1} cellPadding={6} style={{ borderCollapse: "collapse" }}>
-        <thead>
+      <table className="list-table w-full border border-gray-300 border-collapse text-sm">
+        <thead className="bg-gray-200">
           <tr>
-            <th>Name</th>
-            <th>Birthday</th>
-            <th>Age</th>
-            <th>Address</th>
-            <th>Medicines</th>
-            <th>Actions</th>
+            <th className="border border-gray-300 px-4 py-2 text-left font-semibold">
+              Name
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-left font-semibold">
+              Birthday
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-left font-semibold">
+              Age
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-left font-semibold">
+              Address
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-left font-semibold">
+              Medicines
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-left font-semibold">
+              Actions
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -130,21 +142,35 @@ export default function PatientList() {
             </tr>
           ) : (
             patients.map((patient: Patient, _id) => (
-              <tr key={_id}>
-                <td>
+              <tr key={_id} className="hover:bg-blue-50 even:bg-gray-100">
+                <td className="border border-gray-300 px-4 py-3">
                   {patient.firstName} {patient.middleName} {patient.lastName}
                 </td>
-                <td>{patient.birthday?.slice(0, 10)}</td>
-                <td>{patient.age}</td>
-                <td>{patient.address}</td>
-                <td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {patient.birthday?.slice(0, 10)}
+                </td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {patient.age}
+                </td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {patient.address}
+                </td>
+                <td className="border border-gray-300 px-4 py-3">
                   {patient.medicines?.map((m: string, i: number) => (
                     <div key={i}>{m}</div>
                   ))}
                 </td>
-                <td>
-                  <Link to={`/edit-patient/${patient._id}`}>Edit</Link>
-                  <Link to={`/purchase-patient/${patient._id}`}>
+                <td className="border border-gray-300 px-4 py-3">
+                  <Link
+                    to={`/edit-patient/${patient._id}`}
+                    className="td-links mt-2 mr-4 px-3 py-1 bg-green-500 text-m text-white rounded hover:bg-gree-600"
+                  >
+                    Edit
+                  </Link>
+                  <Link
+                    to={`/purchase-patient/${patient._id}`}
+                    className="td-links mt-2 px-3 py-1 bg-green-500 text-m text-white rounded hover:bg-green-600"
+                  >
                     Add Purchase
                   </Link>
                 </td>

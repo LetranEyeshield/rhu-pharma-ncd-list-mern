@@ -33,23 +33,37 @@ export default function PatientList() {
 
   return (
     <div>
-      <h2>Patient Purchase List</h2>
+      <h2 className="text-2xl md:text-5xl my-6 font-bold">
+        Patient Purchase Record
+      </h2>
       <input
         type="text"
         placeholder="Search by name..."
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
-        className="border p-2 mb-4 rounded"
+        className="border py-1 px-2 mb-4 rounded bg-green-100"
       />
-      <table border={1} cellPadding={6} style={{ borderCollapse: "collapse" }}>
-        <thead>
+      <table className="list-table w-full border border-gray-300 border-collapse text-sm">
+        <thead className="bg-gray-200">
           <tr>
-            <th>Name</th>
-            <th>Birthday</th>
-            <th>Age</th>
-            <th>Address</th>
-            <th>Medicines</th>
-            <th>Purchase Date</th>
+            <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-center">
+              Name
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-center">
+              Birthday
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-center">
+              Age
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-center">
+              Address
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-center">
+              Medicines
+            </th>
+            <th className="border border-gray-300 px-4 py-2 text-left font-semibold text-center">
+              Purchase Date
+            </th>
           </tr>
         </thead>
 
@@ -62,25 +76,38 @@ export default function PatientList() {
             </tr>
           ) : (
             purchase.map((purchase: Purchase, pid) => (
-              <tr key={pid}>
-                <td>
+              <tr key={pid} className="hover:bg-blue-50 even:bg-gray-100">
+                <td className="border border-gray-300 px-4 py-3">
                   {purchase.firstName} {purchase.middleName} {purchase.lastName}
                 </td>
-                <td>{purchase.birthday?.slice(0, 10)}</td>
-                <td>{purchase.age}</td>
-                <td>{purchase.address}</td>
-                <td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {purchase.birthday?.slice(0, 10)}
+                </td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {purchase.age}
+                </td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {purchase.address}
+                </td>
+                <td className="border border-gray-300 px-4 py-3">
                   {purchase.medicines?.map((m: string, i: number) => (
                     <div key={i}>{m}</div>
                   ))}
                 </td>
-                <td>{new Date(purchase.createdAt).toLocaleDateString()}</td>
+                <td className="border border-gray-300 px-4 py-3">
+                  {new Date(purchase.createdAt).toLocaleDateString()}
+                </td>
               </tr>
             ))
           )}
         </tbody>
       </table>
-      <Link to={`/dashboard`}>Back</Link>
+      <Link
+        to={`/dashboard`}
+        className="back-link inline-block mt-6 mx-4 px-4 py-2 bg-blue-500 text-xl text-white rounded hover:bg-blue-600"
+      >
+        Back
+      </Link>
     </div>
   );
 }

@@ -12,6 +12,7 @@ import PatientForm from "./pages/PatientForm";
 import EditPatientForm from "./pages/EditPatientForm";
 import PurchasePatientForm from "./pages/PurchasePatientForm";
 import PurchaseList from "./pages/PurchaseList";
+import pharmBanner from "./images/pharm-banner.jpg";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -38,6 +39,10 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p> */}
+      <h1 className="h1 text-3xl font-bold md:text-5xl mb-6">
+        PHARM NCD PATIENT LIST
+      </h1>
+      <img src={pharmBanner} alt="Banner Image" className="banner-image" />
       <Router>
         <Routes>
           <Route path="/login" element={<LoginPage />} />

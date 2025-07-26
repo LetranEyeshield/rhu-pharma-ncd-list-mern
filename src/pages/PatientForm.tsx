@@ -2,7 +2,29 @@ import { useState } from "react";
 import { addPatient } from "../services/api";
 import { Link } from "react-router-dom";
 
-const medicinesList = ["Medicine 1", "Medicine 2", "Medicine 3"];
+const medicinesList = [
+  "AMLODIPINE",
+  "LOSARTAN",
+  "METOPROLOL",
+  "ASPIRIN",
+  "TRIMETAZIDINE",
+  "SIMVASTATIN",
+  "ATORVASTATIN",
+  "METFORMIN",
+  "GLICLAZIDE",
+  "METHYLDOPA",
+  "IRBESARTAN",
+  "CLOPIDOGREL",
+  "ROSUVASTATIN",
+  "FELODIPINE",
+  "CAPTOPRIL",
+  "CARVEDILOL",
+  "CLONIDINE",
+  "FUROSEMIDE",
+  "DIGOXIN",
+  "SPIRONOLACTONE",
+  "LOSARTAN + HCTZ",
+];
 
 export default function PatientForm() {
   const [form, setForm] = useState({
@@ -55,43 +77,77 @@ export default function PatientForm() {
 
   return (
     <>
-      <form onSubmit={handleSubmit}>
-        <input
-          name="firstName"
-          placeholder="First Name"
-          onChange={handleChange}
-        />
-        <input
-          name="middleName"
-          placeholder="Middle Name"
-          onChange={handleChange}
-        />
-        <input
-          name="lastName"
-          placeholder="Last Name"
-          onChange={handleChange}
-        />
-        <input type="date" name="birthday" onChange={handleChange} />
-        <input type="number" name="age" onChange={handleChange} />
-        <input name="address" placeholder="Address" onChange={handleChange} />
+      <div className="p-4 max-w-md mx-auto border rounded shadow bg-green-200 mt-8">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <input
+            className="w-full p-2 border rounded mt-2"
+            name="firstName"
+            placeholder="First Name"
+            onChange={handleChange}
+          />
+          <input
+            className="w-full p-2 border rounded mt-2"
+            name="middleName"
+            placeholder="Middle Name"
+            onChange={handleChange}
+          />
+          <input
+            className="w-full p-2 border rounded mt-2"
+            name="lastName"
+            placeholder="Last Name"
+            onChange={handleChange}
+          />
+          <input
+            className="w-full p-2 border rounded mt-2"
+            type="date"
+            name="birthday"
+            onChange={handleChange}
+          />
+          <input
+            className="w-full p-2 border rounded mt-2"
+            type="number"
+            name="age"
+            onChange={handleChange}
+          />
+          <input
+            className="w-full p-2 border rounded mt-2"
+            name="address"
+            placeholder="Address"
+            onChange={handleChange}
+          />
 
-        <fieldset>
-          <legend>Select Medicines</legend>
-          {medicinesList.map((medicine) => (
-            <label key={medicine}>
-              <input
-                type="checkbox"
-                checked={form.medicines.includes(medicine)}
-                onChange={() => handleCheckbox(medicine)}
-              />
-              {medicine}
-            </label>
-          ))}
-        </fieldset>
+          <fieldset className="w-full p-2 border rounded mt-2 bg-gray-100">
+            {medicinesList.map((med) => (
+              <div className="fieldset-div flex">
+                <span className="label-span">
+                  <label key={med}> {med}</label>
+                </span>
+                <span className="checkbox-span">
+                  <input
+                    className="w-full p-2 border rounded mt-2"
+                    type="checkbox"
+                    checked={form.medicines.includes(med)}
+                    onChange={() => handleCheckbox(med)}
+                  />
+                </span>
+              </div>
+            ))}
+          </fieldset>
 
-        <button type="submit">Add Patient</button>
-      </form>
-      <Link to={`/dashboard`}>Back</Link>
+          <button
+            type="submit"
+            className="mt-2 px-4 py-2 bg-blue-500 text-l md:text-xl text-white rounded hover:bg-blue-600"
+          >
+            Add Patient
+          </button>
+        </form>
+      </div>
+      <Link
+        to={`/dashboard`}
+        className="back-link inline-block mt-6 mx-4 px-4 py-2 bg-blue-500 text-xl text-white rounded hover:bg-blue-600"
+      >
+        Back
+      </Link>
     </>
   );
 }

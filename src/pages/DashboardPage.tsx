@@ -1,24 +1,23 @@
 import { Link } from "react-router-dom";
 import LogoutButton from "../components/LogoutButton";
-import PatientListDefaultAxios from "../components/PatientListDefaultAxios";
-import PatientDefaultFetchList from "../components/PatientDefaultFetchList";
-import TheDebounceDefaultAxios from "../components/TheDebounceDefaultAxios";
-import DefaultDebounce from "../components/DefaultDebounce";
-import TheDebounceAxios from "../components/TheDebounceAxios";
 import PatientList from "../components/PatientList";
 
 export default function DashboardPage() {
   return (
     <div>
-      <h1>PHARM NCD PATIENT LIST</h1>
-      {/* <PatientDefaultFetchList /> */}
-      {/* <DefaultDebounce /> */}
-      {/* <PatientListDefaultAxios /> */}
-      {/* <TheDebounceDefaultAxios /> */}
-      {/* <TheDebounceAxios /> */}
       <PatientList />
-      <Link to="/add-patient">Add Patient</Link>
-      <Link to="/purchase-list">View Patient Purchases</Link>
+      <Link
+        to="/add-patient"
+        className="dashboard-links inline-block mt-6 mx-4 p-2 bg-blue-500 text-l text-white rounded hover:bg-blue-600"
+      >
+        Add Patient
+      </Link>
+      <Link
+        to="/purchase-list"
+        className="dashboard-links inline-block mt-6 mx-4 p-2 bg-blue-500 text-l text-white rounded hover:bg-blue-600"
+      >
+        View Patient Purchases
+      </Link>
       <LogoutButton />
     </div>
   );
