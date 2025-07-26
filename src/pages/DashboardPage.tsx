@@ -18,6 +18,7 @@ export default function DashboardPage() {
       {/* <TheDebounceAxios /> */}
       <PatientList />
       <Link to="/add-patient">Add Patient</Link>
+      <Link to="/purchase-list">View Patient Purchases</Link>
       <LogoutButton />
     </div>
   );

@@ -19,4 +19,5 @@ export interface Purchase {
   age: number;
   address: string;
   medicines: string[];
+  createdAt: string;
 }

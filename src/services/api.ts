@@ -142,7 +142,19 @@
 //
 //AXIOS
 import axios from "./axiosInstance";
-import type { Patient, Purchase } from "../types";
+import type { Patient } from "../types";
+export interface Purchase {
+  _id: string;
+  pid: string;
+  firstName: string;
+  middleName?: string;
+  lastName: string;
+  birthday: string;
+  age: number;
+  address: string;
+  medicines: string[];
+  createdAt: string;
+}
 export const loginUser = async (
   username: string,
   password: string
@@ -215,6 +227,13 @@ export async function deletePatient(id: string) {
 export async function purchasePatient(data: Omit<Purchase, "_id">) {
   const res = await axios.post("/purchase", data);
   return res.data;
+}
+
+export async function searchPurchase(name: string): Promise<Purchase[]> {
+  const response = await axios.get(`/purchase/search`, {
+    params: { name },
+  });
+  return response.data;
 }
 
 export async function searchPatient(name: string): Promise<Patient[]> {

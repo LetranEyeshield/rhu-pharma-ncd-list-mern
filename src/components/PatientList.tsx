@@ -121,11 +121,15 @@ export default function PatientList() {
             <th>Actions</th>
           </tr>
         </thead>
-        {patients.length === 0 ? (
-          <p>No patients found.</p>
-        ) : (
-          <tbody>
-            {patients.map((patient: Patient, _id) => (
+        <tbody>
+          {patients.length === 0 ? (
+            <tr>
+              <td colSpan={6} style={{ textAlign: "center" }}>
+                No records found.
+              </td>
+            </tr>
+          ) : (
+            patients.map((patient: Patient, _id) => (
               <tr key={_id}>
                 <td>
                   {patient.firstName} {patient.middleName} {patient.lastName}
@@ -145,9 +149,9 @@ export default function PatientList() {
                   </Link>
                 </td>
               </tr>
-            ))}
-          </tbody>
-        )}
+            ))
+          )}
+        </tbody>
       </table>
     </div>
   );

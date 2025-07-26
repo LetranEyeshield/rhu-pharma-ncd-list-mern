@@ -27,4 +27,28 @@ router.post("/purchase", async (req, res) => {
   }
 });
 
+router.get("/search", async (req, res) => {
+  const name = (req.query.name as string) || "";
+
+  try {
+    const query = name
+      ? {
+          $or: [
+            { firstName: new RegExp(name, "i") },
+            { middleName: new RegExp(name, "i") },
+            { lastName: new RegExp(name, "i") },
+          ],
+        }
+      : {}; // empty name = fetch all
+    // const patients = await Patient.find(query);
+    const purchase = await Purchase.find(query)
+      .sort({ createdAt: -1 })
+      .limit(25);
+    res.json(purchase);
+  } catch (error) {
+    console.error("Search error:", error);
+    res.status(500).json({ message: "Search failed", error });
+  }
+});
+
 export default router;
