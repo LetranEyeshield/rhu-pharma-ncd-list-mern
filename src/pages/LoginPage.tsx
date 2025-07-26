@@ -1,5 +1,5 @@
 import LoginForm from "../components/LoginForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { loginUser } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -41,6 +41,11 @@ export default function LoginPage() {
   const [message, setMessage] = useState("");
   const [success, setSuccess] = useState<boolean | null>(null);
   const navigate = useNavigate();
+
+  // Fetch patients when debounced term changes
+  useEffect(() => {
+    toast("You can use admin as username and password for testing purposes!");
+  }, []);
 
   const handleLogin = async (username: string, password: string) => {
     const result = await loginUser(username, password);
