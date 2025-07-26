@@ -12,6 +12,18 @@ import purchaseRoutes from "./routes/purchase"; // ✅ Corrected path
 
 const app = express();
 
+const allowedOrigins = [
+  "http://localhost:5173", // for local dev
+  "https://rhu-pharma-ncd-list-mern.vercel.app", // for production
+];
+
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true, // if using cookies or sessions
+  })
+);
+
 app.use(cors());
 app.use(express.json());
 
