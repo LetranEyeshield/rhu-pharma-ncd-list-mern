@@ -1,29 +1,30 @@
 import { useState } from "react";
 import { addPatient } from "../services/api";
 import { Link } from "react-router-dom";
+import toast from "react-hot-toast";
 
-const medicinesList = [
+export const medicinesList = [
   "AMLODIPINE",
-  "LOSARTAN",
-  "METOPROLOL",
   "ASPIRIN",
-  "TRIMETAZIDINE",
-  "SIMVASTATIN",
   "ATORVASTATIN",
-  "METFORMIN",
-  "GLICLAZIDE",
-  "METHYLDOPA",
-  "IRBESARTAN",
-  "CLOPIDOGREL",
-  "ROSUVASTATIN",
-  "FELODIPINE",
   "CAPTOPRIL",
   "CARVEDILOL",
   "CLONIDINE",
-  "FUROSEMIDE",
+  "CLOPIDOGREL",
   "DIGOXIN",
-  "SPIRONOLACTONE",
+  "FELODIPINE",
+  "FUROSEMIDE",
+  "GLICLAZIDE",
+  "IRBESARTAN",
+  "LOSARTAN",
   "LOSARTAN + HCTZ",
+  "METFORMIN",
+  "METHYLDOPA",
+  "METOPROLOL",
+  "ROSUVASTATIN",
+  "TRIMETAZIDINE",
+  "SIMVASTATIN",
+  "SPIRONOLACTONE",
 ];
 
 export default function PatientForm() {
@@ -72,13 +73,15 @@ export default function PatientForm() {
 
     const result = await addPatient(newPatient);
     console.log(slicedBirthday);
-    alert(result.message);
+    //alert(result.message);
+    toast(result.message);
   };
 
   return (
     <>
       <div className="p-4 max-w-md mx-auto border rounded shadow bg-green-200 mt-8">
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <h2 className="text-l md:text-3xl font-bold">ADD PATIENT RECORD</h2>
           <input
             className="w-full p-2 border rounded mt-2"
             name="firstName"

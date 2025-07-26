@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { purchasePatient } from "../services/api";
+import { medicinesList } from "./PatientForm";
+import toast from "react-hot-toast";
 
 export default function PurchasePatientForm() {
   //const { pid } = useParams();
@@ -58,7 +60,8 @@ export default function PurchasePatientForm() {
     // await updatePatient(id!, form);
     // await purchasePatient(pid!, editPurchase);
     await purchasePatient(editPurchase);
-    alert("Purchased Success!");
+    //alert("Purchase Success!");
+    toast("Purchase Success!");
     //navigate("/");
   };
 
@@ -111,7 +114,7 @@ export default function PurchasePatientForm() {
           <input name="address" value={form.address} onChange={handleChange} />
 
           <fieldset className="w-full p-2 border rounded mt-2 bg-gray-100">
-            {["Medicine 1", "Medicine 2", "Medicine 3"].map((med) => (
+            {medicinesList.map((med) => (
               <div className="fieldset-div flex">
                 <span className="label-span">
                   <label key={med}> {med}</label>

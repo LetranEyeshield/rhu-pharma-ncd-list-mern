@@ -14,11 +14,25 @@ import PurchasePatientForm from "./pages/PurchasePatientForm";
 import PurchaseList from "./pages/PurchaseList";
 import pharmBanner from "./images/pharm-banner.jpg";
 
+import { Toaster } from "react-hot-toast";
+
 function App() {
   // const [count, setCount] = useState(0);
 
   return (
     <>
+      {/* <Toaster /> */}
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            background: "#defce6",
+            color: "#000",
+          },
+        }}
+      />
+
       {/* <div>
         <a href="https://vite.dev" target="_blank">
           <img src={viteLogo} className="logo" alt="Vite logo" />

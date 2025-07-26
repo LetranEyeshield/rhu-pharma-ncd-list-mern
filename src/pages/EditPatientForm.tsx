@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { updatePatient } from "../services/api";
-// import type { Patient } from "../types";
+import { medicinesList } from "./PatientForm";
 
 export default function EditPatientForm() {
   const { id } = useParams();
@@ -50,7 +50,8 @@ export default function EditPatientForm() {
     };
     // await updatePatient(id!, form);
     await updatePatient(id!, editPatient);
-    alert("Patient updated!");
+    // alert("Patient updated!");
+    toast("Patient Updated!");
     navigate("/");
   };
 
@@ -100,7 +101,7 @@ export default function EditPatientForm() {
           />
 
           <fieldset className="w-full p-2 border rounded mt-2 bg-gray-100">
-            {["Medicine 1", "Medicine 2", "Medicine 3"].map((med) => (
+            {medicinesList.map((med) => (
               <div className="fieldset-div flex">
                 <span className="label-span">
                   <label key={med}> {med}</label>

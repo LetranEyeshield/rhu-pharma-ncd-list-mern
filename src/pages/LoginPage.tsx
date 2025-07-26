@@ -2,6 +2,7 @@ import LoginForm from "../components/LoginForm";
 import { useState } from "react";
 import { loginUser } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 export default function LoginPage() {
   //FOR MOCK API
@@ -56,7 +57,7 @@ export default function LoginPage() {
     // }
 
     if (result.success && result.token) {
-      setMessage("Login Success");
+      setMessage(toast("Login Success"));
       setSuccess(true);
 
       // ✅ Save token and user
@@ -65,7 +66,7 @@ export default function LoginPage() {
       //navigate("/");
       navigate("/dashboard", { replace: true });
     } else {
-      setMessage("Invalid Credentials");
+      setMessage(toast("Invalid Credentials"));
       setSuccess(false);
     }
     // const handleLogin = async (username: string, password: string) => {
