@@ -120,9 +120,26 @@ router.put("/:id", async (req: Request, res: Response) => {
     const updatedPatient = await Patient.findByIdAndUpdate(id, req.body, {
       new: true,
     });
-    res.json(updatedPatient);
+    res.json({ message: "Patient Updated!", updatedPatient });
   } catch (error) {
     res.status(500).json({ message: "Error updating patient", error });
+  }
+});
+
+//
+//delete patient
+router.delete("/:id", async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const deletedPatient = await Patient.findByIdAndDelete(id);
+
+    if (!deletedPatient) {
+      return res.status(404).json({ message: "Patient not found" });
+    }
+
+    res.json({ message: "Patient deleted successfully", deletedPatient });
+  } catch (error) {
+    res.status(500).json({ message: "Error deleting patient", error });
   }
 });
 

@@ -218,19 +218,53 @@ export async function getPatient(id: string): Promise<Patient> {
 }
 
 // Update patient
+// export async function updatePatient(id: string, data: Partial<Patient>) {
+//   //const res = await axios.put(`/patient/${id}`, data);
+//   const res = await axios.put(`/patient/${id}`, data);
+//   // const res = await axios.put(
+//   //   `${import.meta.env.VITE_API_URL}/patient${id}`,
+//   //   data
+//   // );
+//   return res.data;
+// }
+
 export async function updatePatient(id: string, data: Partial<Patient>) {
-  const res = await axios.put(`/patient/${id}`, data);
-  // const res = await axios.put(
-  //   `${import.meta.env.VITE_API_URL}/patient${id}`,
-  //   data
-  // );
-  return res.data;
+  const res = await fetch(
+    `https://rhu-pharma-ncd-list-mern.onrender.com/api/edit-patient/${id}`,
+    {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to update patient");
+  }
+
+  return await res.json();
 }
 
 // Delete patient
+// export async function deletePatient(id: string) {
+//   const res = await axios.delete(`/patient/${id}`);
+//   return res.data;
+// }
 export async function deletePatient(id: string) {
-  const res = await axios.delete(`/patient/${id}`);
-  return res.data;
+  const res = await fetch(
+    `https://rhu-pharma-ncd-list-mern.onrender.com/api/delete-patient/${id}`,
+    {
+      method: "DELETE",
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to delete patient");
+  }
+
+  return await res.json();
 }
 
 // Purchase Patient

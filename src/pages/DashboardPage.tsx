@@ -5,7 +5,6 @@ import PatientList from "../components/PatientList";
 export default function DashboardPage() {
   return (
     <div>
-      <PatientList />
       <Link
         to="/add-patient"
         className="dashboard-links inline-block mt-6 mx-4 p-2 bg-blue-500 text-l text-white rounded hover:bg-blue-600"
@@ -19,6 +18,7 @@ export default function DashboardPage() {
         View Patient Purchases
       </Link>
       <LogoutButton />
+      <PatientList />
     </div>
   );
 }

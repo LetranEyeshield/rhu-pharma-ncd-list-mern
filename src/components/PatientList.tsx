@@ -167,6 +167,12 @@ export default function PatientList() {
                   >
                     Edit
                   </Link>
+                  {/* <Link
+                    to={`/delete-patient/${patient._id}`}
+                    className="td-links mt-2 mr-4 px-3 py-1 bg-green-500 text-m text-white rounded hover:bg-gree-600"
+                  >
+                    Delete
+                  </Link> */}
                   <Link
                     to={`/purchase-patient/${patient._id}`}
                     className="td-links mt-2 px-3 py-1 bg-green-500 text-m text-white rounded hover:bg-green-600"
