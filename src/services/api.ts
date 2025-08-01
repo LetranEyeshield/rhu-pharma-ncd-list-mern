@@ -211,10 +211,23 @@ export async function getPatients(): Promise<Patient[]> {
 }
 
 // Get single patient by ID
+// export async function getPatient(id: string): Promise<Patient> {
+//   const res = await axios.get(`/patient/${id}`);
+//   // const res = await axios.get(`${import.meta.env.VITE_API_URL}/patient${id}`);
+//   return res.data;
+// }
+
 export async function getPatient(id: string): Promise<Patient> {
-  const res = await axios.get(`/patient/${id}`);
-  // const res = await axios.get(`${import.meta.env.VITE_API_URL}/patient${id}`);
-  return res.data;
+  const res = await fetch(
+    `https://rhu-pharma-ncd-list-mern.onrender.com/api/patient/${id}`
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch patient");
+  }
+
+  const data = await res.json();
+  return data;
 }
 
 // Update patient

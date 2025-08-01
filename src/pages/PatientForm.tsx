@@ -121,7 +121,7 @@ export default function PatientForm() {
 
           <fieldset className="w-full p-2 border rounded mt-2 bg-gray-100">
             {medicinesList.map((med) => (
-              <div className="fieldset-div flex">
+              <div className="fieldset-div flex border p-2">
                 <span className="label-span">
                   <label key={med}> {med}</label>
                 </span>
