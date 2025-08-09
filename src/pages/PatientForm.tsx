@@ -27,6 +27,8 @@ export const medicinesList = [
   "SPIRONOLACTONE",
 ];
 
+
+
 export default function PatientForm() {
   const [form, setForm] = useState({
     firstName: "",

@@ -205,8 +205,8 @@ export async function addPatient(data: Omit<Patient, "_id">) {
 
 // Get all patients
 export async function getPatients(): Promise<Patient[]> {
-  const res = await axios.get("/patient");
-  // const res = await axios.get(`${import.meta.env.VITE_API_URL}/patient`);
+  //  const res = await axios.get("/patient");
+  const res = await axios.get(`${import.meta.env.VITE_API_URL}/patient`);
   return res.data;
 }
 
